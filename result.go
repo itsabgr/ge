@@ -13,7 +13,7 @@ func (r Result[T]) Must(wrap error) T {
 	if wrap == nil {
 		err = r.error
 	} else {
-		err = Wrap(r.error, wrap)
+		err = Wrap(wrap, r.error)
 	}
 	panic(err)
 }
