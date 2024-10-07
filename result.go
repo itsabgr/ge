@@ -22,6 +22,10 @@ func (r Result[T]) Err() error {
 	return r.error
 }
 
+func (r Result[T]) Unwrap() (T, error) {
+	return r.value, r.error
+}
+
 func Err[T any](err error) Result[T] {
 	return Result[T]{error: err}
 }
