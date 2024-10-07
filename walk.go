@@ -17,13 +17,22 @@ func walk(root error, depth int, fn func(depth int, err error) bool) {
 	if root == nil {
 		return
 	}
-	if !fn(depth, root) {
-		return
+
+	inner := ErrorOf(root)
+
+	if inner == nil {
+		if !fn(depth, root) {
+			return
+		}
+	} else {
+		if !fn(depth, inner) {
+			return
+		}
 	}
 
 	depth += 1
 
-	if inner := ErrorOf(root); inner != nil {
+	if inner != nil {
 		switch e := inner.(type) {
 		case UnwrapError:
 			err := e.Unwrap()
