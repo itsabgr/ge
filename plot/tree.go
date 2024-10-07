@@ -14,6 +14,13 @@ type treeNode struct {
 	IsMulti bool
 }
 
+func sprintErr(err error) string {
+	if s, ok := err.(fmt.Stringer); ok {
+		return s.String()
+	}
+	return err.Error()
+}
+
 func Tree(root error) interface {
 	Bytes() []byte
 	fmt.Stringer
@@ -41,11 +48,12 @@ func Tree(root error) interface {
 			} else {
 				node.Tree = treeMap[depth-1].Tree.AddBranch(0)
 			}
+
 		default:
 			if depth == 0 {
-				node.Tree = treeprint.NewWithRoot(err)
+				node.Tree = treeprint.NewWithRoot(sprintErr(err))
 			} else {
-				node.Tree = treeMap[depth-1].Tree.AddNode(err)
+				node.Tree = treeMap[depth-1].Tree.AddNode(sprintErr(err))
 			}
 		}
 		treeMap[depth] = node

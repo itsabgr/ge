@@ -4,6 +4,13 @@ import (
 	"errors"
 )
 
+func ErrorOf(err any) error {
+	if e, ok := err.(interface{ Err() error }); ok {
+		return e.Err()
+	}
+	return nil
+}
+
 type UnwrapError interface {
 	Unwrap() error
 }
@@ -27,11 +34,4 @@ func Join(errs ...error) error {
 func As[T any](err error) (T, bool) {
 	var val T
 	return val, errors.As(err, &val)
-}
-
-func ErrorOf(err any) error {
-	if e, ok := err.(interface{ Err() error }); ok {
-		return e.Err()
-	}
-	return nil
 }

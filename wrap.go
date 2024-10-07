@@ -9,15 +9,19 @@ func (w Wrapped) Error() string {
 	return w.wrapper.Error()
 }
 
+func (w Wrapped) Err() error {
+	return w.wrapper
+}
+
 func (w Wrapped) String() string {
-	return "wrapped error: " + w.Error()
+	return "error: " + w.wrapper.Error() + ": " + w.original.Error()
 }
 
 func (w Wrapped) Unwrap() error {
 	return w.original
 }
 
-func Wrap(originalError error, newWrapperError error) error {
+func Wrap(newWrapperError, originalError error) error {
 	if originalError == nil {
 		return nil
 	}
