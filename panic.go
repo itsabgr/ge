@@ -4,18 +4,6 @@ import (
 	"errors"
 )
 
-func Throw(err error) {
-	if err == nil {
-		return
-	}
-	panic(err)
-}
-
-func Must[T any](value T, err error) T {
-	Throw(err)
-	return value
-}
-
 var ErrAssertionFailed = errors.New("assertion failed")
 
 func Assert(cond bool, errs ...error) {
@@ -30,6 +18,18 @@ func Assert(cond bool, errs ...error) {
 	default:
 		panic(Join(errs...))
 	}
+}
+
+func Throw(err error) {
+	if err == nil {
+		return
+	}
+	panic(err)
+}
+
+func Must[T any](value T, err error) T {
+	Throw(err)
+	return value
 }
 
 func Try(fn func()) (recovered any) {
