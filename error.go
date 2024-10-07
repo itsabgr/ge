@@ -7,7 +7,7 @@ type Error[T comparable] struct {
 }
 
 func (e Error[T]) String() string {
-	return "generic error: " + e.Error()
+	return "error: " + e.Error()
 }
 
 func (e Error[T]) Error() string {
