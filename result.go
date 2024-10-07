@@ -29,3 +29,7 @@ func Err[T any](err error) Result[T] {
 func OK[T any](val T) Result[T] {
 	return Result[T]{value: val}
 }
+
+func Res[T any](val T, err error) Result[T] {
+	return Result[T]{val, err}
+}
