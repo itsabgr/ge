@@ -32,7 +32,7 @@ func Tree(root error) interface {
 
 	treeMap := map[int]*treeNode{}
 
-	for depth, err := range ge.Walk(root) {
+	for depth, err := range walk(root) {
 		node := &treeNode{}
 		switch err.(type) {
 		case ge.UnwrapError:
