@@ -30,8 +30,8 @@ func walk(root error, depth int, fn func(depth int, err error) bool) {
 		err := e.Unwrap()
 		walk(err, depth, fn)
 	case UnwrapErrors:
-		for _, errs := range e.Unwrap() {
-			walk(errs, depth, fn)
+		for _, err := range e.Unwrap() {
+			walk(err, depth, fn)
 		}
 	default:
 		fn(depth, e)
@@ -42,8 +42,8 @@ func walk(root error, depth int, fn func(depth int, err error) bool) {
 		err := e.Unwrap()
 		walk(err, depth, fn)
 	case UnwrapErrors:
-		for _, errs := range e.Unwrap() {
-			walk(errs, depth, fn)
+		for _, err := range e.Unwrap() {
+			walk(err, depth, fn)
 		}
 	}
 
