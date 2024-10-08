@@ -18,30 +18,23 @@ func walk(root error, depth int, fn func(depth int, err error) bool) {
 		return
 	}
 
-	inner := ErrorOf(root)
-
-	if inner == nil {
-		if !fn(depth, root) {
-			return
-		}
-	} else {
-		if !fn(depth, inner) {
-			return
-		}
+	if !fn(depth, root) {
+		return
 	}
 
 	depth += 1
 
-	if inner != nil {
-		switch e := inner.(type) {
-		case UnwrapError:
-			err := e.Unwrap()
-			walk(err, depth, fn)
-		case UnwrapErrors:
-			for _, errs := range e.Unwrap() {
-				walk(errs, depth, fn)
-			}
+	switch e := ErrorOf(root).(type) {
+	case nil:
+	case UnwrapError:
+		err := e.Unwrap()
+		walk(err, depth, fn)
+	case UnwrapErrors:
+		for _, errs := range e.Unwrap() {
+			walk(errs, depth, fn)
 		}
+	default:
+		fn(depth, e)
 	}
 
 	switch e := root.(type) {
