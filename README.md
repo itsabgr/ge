@@ -1,4 +1,4 @@
-#Go Errors
+# Go Errors
 
 [![Go Vet](https://github.com/itsabgr/ge/actions/workflows/go.yml/badge.svg)](https://github.com/itsabgr/ge/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/itsabgr/ge)](https://goreportcard.com/report/github.com/itsabgr/ge)
