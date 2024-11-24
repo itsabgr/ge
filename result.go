@@ -5,17 +5,15 @@ type Result[T any] struct {
 	error error
 }
 
-func (r Result[T]) Must(wrap error) T {
+func (r Result[T]) Must(wraps ...error) T {
 	if r.error == nil {
 		return r.value
 	}
-	var err error
-	if wrap == nil {
-		err = r.error
-	} else {
-		err = Wrap(wrap, r.error)
+	err := Join(wraps...)
+	if err == nil {
+		panic(r.error)
 	}
-	panic(err)
+	panic(Wrap(err, r.error))
 }
 
 func (r Result[T]) Err() error {

@@ -10,14 +10,10 @@ func Assert(cond bool, errs ...error) {
 	if cond {
 		return
 	}
-	switch len(errs) {
-	case 0:
+	if len(errs) == 0 {
 		panic(ErrAssertionFailed)
-	case 1:
-		panic(errs[0])
-	default:
-		panic(Join(errs...))
 	}
+	panic(Join(errs...))
 }
 
 func Throw(err error) {

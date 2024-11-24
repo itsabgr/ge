@@ -1,23 +1,23 @@
 package ge
 
-type Wrapped struct {
+type wrapped struct {
 	wrapper  error
 	original error
 }
 
-func (w Wrapped) Error() string {
+func (w wrapped) Error() string {
 	return w.wrapper.Error()
 }
 
-func (w Wrapped) Err() error {
+func (w wrapped) Err() error {
 	return w.wrapper
 }
 
-func (w Wrapped) String() string {
+func (w wrapped) String() string {
 	return "error: " + w.wrapper.Error() + ": " + w.original.Error()
 }
 
-func (w Wrapped) Unwrap() error {
+func (w wrapped) Unwrap() error {
 	return w.original
 }
 
@@ -25,5 +25,5 @@ func Wrap(newWrapperError, originalError error) error {
 	if originalError == nil {
 		return nil
 	}
-	return Wrapped{newWrapperError, originalError}
+	return wrapped{newWrapperError, originalError}
 }

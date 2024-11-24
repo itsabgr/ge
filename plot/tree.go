@@ -3,9 +3,7 @@ package plot
 import (
 	"fmt"
 	"github.com/itsabgr/ge"
-	_ "github.com/itsabgr/ge"
 	"github.com/xlab/treeprint"
-	_ "github.com/xlab/treeprint"
 )
 
 type treeNode struct {

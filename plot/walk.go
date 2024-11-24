@@ -12,7 +12,6 @@ func walk(err error) iter.Seq2[int, error] {
 		})
 	}
 }
-
 func walkFn(root error, depth int, fn func(depth int, err error) bool) {
 
 	if root == nil {
@@ -25,7 +24,7 @@ func walkFn(root error, depth int, fn func(depth int, err error) bool) {
 
 	depth += 1
 
-	switch e := ge.ErrorOf(root).(type) {
+	switch e := ge.ErrOf(root).(type) {
 	case nil:
 	case ge.UnwrapError:
 		err := e.Unwrap()
