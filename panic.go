@@ -10,10 +10,11 @@ func Assert(cond bool, errs ...error) {
 	if cond {
 		return
 	}
-	if len(errs) == 0 {
+	err := Join(errs...)
+	if err == nil {
 		panic(ErrAssertionFailed)
 	}
-	panic(Join(errs...))
+	panic(errs)
 }
 
 func Throw(err error) {
