@@ -52,16 +52,16 @@ func (d detailed) Details() iter.Seq2[string, any] {
 }
 
 func (d D) String() string {
+	if len(d) == 0 {
+		return "[]"
+	}
 	builder := strings.Builder{}
 	for k, v := range d {
 		builder.WriteString(k)
 		builder.WriteString(":")
-		builder.WriteString(fmt.Sprint(v))
+	        builder.WriteString(fmt.Sprint(v))
 		builder.WriteByte(' ')
 	}
 	str := builder.String()
-	if len(str) == 0 {
-		return "[]"
-	}
 	return "[" + str[:len(str)-1] + "]"
 }
