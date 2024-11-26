@@ -20,6 +20,10 @@ func (r Result[T]) Err() error {
 	return r.error
 }
 
+func (r Result[T]) OK() bool {
+	return r.error == nil
+}
+
 func (r Result[T]) Unwrap() (T, error) {
 	return r.value, r.error
 }
