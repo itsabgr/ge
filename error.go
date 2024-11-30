@@ -14,7 +14,7 @@ func (e err[T]) Error() string {
 	return fmt.Sprint(e.value)
 }
 
-func (e err[T]) ErrorValue() any {
+func (e err[T]) Value() any {
 	return e.value
 }
 
