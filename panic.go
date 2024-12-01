@@ -37,6 +37,4 @@ func Try(fn func()) (recovered any) {
 	return nil
 }
 
-func Unreachable() {
-	panic("unreachable")
-}
+const UNREACHABLE = "UNREACHABLE"
