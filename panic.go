@@ -36,3 +36,7 @@ func Try(fn func()) (recovered any) {
 	fn()
 	return nil
 }
+
+func Unreachable() {
+	panic("unreachable")
+}
