@@ -14,7 +14,7 @@ func Assert(cond bool, errs ...error) {
 	if err == nil {
 		panic(ErrAssertionFailed)
 	}
-	panic(errs)
+	panic(err)
 }
 
 func Throw(err error) {
